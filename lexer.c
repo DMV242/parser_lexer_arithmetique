@@ -54,7 +54,7 @@ struct Token next_token(const char *input, int *i)
 {
     bool is_digit_found = false;
     int token_len = 0;
-    struct Token token = { .type = TOKEN_EOF, .value = {0} };
+    struct Token token = { .type = TOKEN_EOF, .value = { 0 } };
     for (int j = *i; input[j] != '\0'; j++)
     {
         if (isdigit(input[j]))
@@ -70,6 +70,7 @@ struct Token next_token(const char *input, int *i)
                 token.value[token_len] = input[j];
             }
             token_len++;
+            (*i)++;
         }
         else if ((input[j] == '+' || input[j] == '-' || input[j] == '*'
                   || input[j] == '/' || input[j] == '%')
@@ -102,9 +103,6 @@ struct Token next_token(const char *input, int *i)
                 return token;
             }
         }
-        (*i)++;
     }
-
     return token;
 }
-
